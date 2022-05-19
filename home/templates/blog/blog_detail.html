@@ -1,0 +1,46 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+
+<section class="container">
+
+  <div class="post-details">
+    <h1 class="post-details-title"> {{blog_obj.title}} </h1>
+    {% if request.user.is_authenticated %}
+    <a class="user-tag"><i class='bx bx-user'></i> {{blog_obj.user.username}} </a>
+    {% else %}
+    {% endif %}
+    <time class="post-time"> <i class='bx bx-time'></i> {{blog_obj.created_at}}</time>
+    <div class="post-details-menu">
+      <a href="{% url 'home' %}"  style="color: rgb(228, 94, 17);"><i class='bx bx-home'></i>Home </a>
+      {% if request.user.is_authenticated %}   
+      <a href="{% url 'add_blog' %}"> / Create Post</a>
+      {% else %}
+      {% endif %}
+    </div>
+
+    <div class="post-imgs">
+      <img class="post-dp" src="/media/{{blog_obj.image}}" alt="">
+    </div>
+    <div class="post-word post-dp">
+      {{blog_obj.content|safe}}
+
+      <div class="user-profile">
+        <ul class="post-times">
+          <li><a class="post-item" href="#"><i class='bx bx-comment-detail'></i> 10 Comments</a></li>
+          <li><a class="post-item" href="#"><i class='bx bx-share'></i> Share</a></li>
+        </ul>
+      </div>
+      <br>
+      <div class="comment-br">
+        <h1 style="font-size: 20px;">Comment here:</h1>
+        <textarea type="text" class="input" placeholder="Write a comment"></textarea>
+        <button class='primary float-right' type="submit">Post Comment</button>
+      </div>
+      <hr class="hr-custom">
+    </div>
+
+</section>
+</section>
+
+{% endblock %}

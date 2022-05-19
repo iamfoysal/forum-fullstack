@@ -1,0 +1,24 @@
+{% extends "blog/base.html" %}
+
+{% block content%}
+
+<body class="bodys">
+    <div class="container">
+        <div class="mt-5">
+            <div class="jumbotron form-bodys">
+                <h2 class="display-4 text-center font-weidth-bold">Empoloyee Informations Remove</h2>
+                <p class="lead  text-center">Are you sure to delete?!</p>
+                <br>
+                <hr class="my-4">
+                <h4>Employee Name : {{ blog_obj.title }}</h4>
+                <form class="mt-5 mb-5" action="" method="POST">
+                    {% csrf_token %}
+                    <a class="btn btn-success float-right d-inline mr-5"
+                        href="{% url 'see_blog' %}">Cancel</a>
+                    <button type="submit" class="btn btn-danger float-right mr-5 ">Confirm Delete</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    {% endblock%}

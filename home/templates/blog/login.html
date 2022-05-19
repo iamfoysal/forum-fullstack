@@ -1,0 +1,43 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<section class="log-body">
+    <div class="glass">
+        <div class="sing-up-form">
+            <h1 style="font-size: 18px;">Welcome To Potato Forum</h1>
+            <h6 style="font-size: 13px;">Login your account to continue</h6>
+            <hr>
+            <div class="form-group text-left pt-5">
+                <label class="form-label" for="loginUsername"> Username</label>
+                <input class="input-box" name="loginUsername" id="loginUsername" type="email"
+                    placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email">
+            </div>
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col text-left">
+                        <label class="form-label" for="loginPassword"> Password</label>
+                    </div>
+                </div>
+                <input class="input-box" name="loginPassword" id="loginPassword" placeholder="Password" type="password"
+                    required data-msg="Please enter your password">
+            </div>
+        
+            <button type="button" class="facebook-btn"  onclick="login()">Sign in</button>
+            <hr>
+            <p class="or">OR</p>
+            <a href="https://www.facebook.com/" class="btn with-social"> <span class="fb-google-login"> <i
+                        class=' fa-facebook bx bxl-facebook-circle'></i> Facebook</span></a>
+            <a href="https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+                class="btn with-social"><span class="fb-google-login"> <i class="bx bxl-google fa-google"> </i>
+                    Google</span></a>
+            <br>
+            <p class="agree">Don't have an account? <a href="{% url 'register' %}">Create one</a></p>
+
+        </div>
+    </div>
+</section>
+
+<!-- new temlates -->
+
+
+{% endblock %}

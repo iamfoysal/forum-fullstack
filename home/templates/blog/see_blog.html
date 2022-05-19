@@ -1,0 +1,35 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<section class="mt-5 pt-5">
+  <div class="container">
+    <a class="user-tag" style="display:inline-block;" ><i class='bx bx-user' ></i> {{user.username}} </a> 
+    
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Blog title</th>
+          <th scope="col">Created at</th>
+          <th scope="col">Update</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for blog in blog_object %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{blog.title}}</td>
+          <td>{{blog.created_at}}</td>
+          <td>
+              <a href="{%  url 'blog_update' blog.slug %}" class="btn btn-success">Update</a>
+         </td>
+          <td><a href="{% url 'blog_delete' blog.id %}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        
+  </div>
+</section>
+
+{% endblock %}
