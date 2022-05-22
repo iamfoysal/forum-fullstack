@@ -7,10 +7,10 @@
   <div class="post-details">
     <h1 class="post-details-title"> {{blog_obj.title}} </h1>
     {% if request.user.is_authenticated %}
-    <a class="user-tag"><i class='bx bx-user'></i> {{blog_obj.user.username}} </a>
+    <a class="user-and-date"><i class="fa fa-pencil-square-o" aria-hidden="true"> </i> {{blog_obj.user.username}} </a>
     {% else %}
     {% endif %}
-    <time class="post-time"> <i class='bx bx-time'></i> {{blog_obj.created_at}}</time>
+    <time class="user-and-date"> <i class="fa fa-clock-o" aria-hidden="true"></i> {{blog_obj.created_at}}</time>
     <div class="post-details-menu">
       <a href="{% url 'home' %}"  style="color: rgb(228, 94, 17);"><i class='bx bx-home'></i>Home </a>
       {% if request.user.is_authenticated %}   
@@ -27,15 +27,21 @@
 
       <div class="user-profile">
         <ul class="post-times">
-          <li><a class="post-item" href="#"><i class='bx bx-comment-detail'></i> 10 Comments</a></li>
-          <li><a class="post-item" href="#"><i class='bx bx-share'></i> Share</a></li>
+          <li><a class="post-item" href="#"><i class="fa fa-comment" aria-hidden="true"></i> 10 Comments</a></li>
+          <li><a class="post-item" href="#"><i class="fa fa-share" aria-hidden="true"></i> Share</a></li>
         </ul>
       </div>
-      <br>
-      <div class="comment-br">
-        <h1 style="font-size: 20px;">Comment here:</h1>
-        <textarea type="text" class="input" placeholder="Write a comment"></textarea>
-        <button class='primary float-right' type="submit">Post Comment</button>
+
+  
+    <form action="" method="post">
+      
+        {% csrf_token %}
+       
+        <textarea type="text" class="input-comment" placeholder="Write a comment"></textarea>
+
+        <button class='comment-btn' type="submit">Post Comment</button>
+
+        </form>
       </div>
       <hr class="hr-custom">
     </div>

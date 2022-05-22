@@ -1,23 +1,50 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from .form import *
+from django.db.models import Q
 from django.contrib.auth import logout
 from django.contrib import messages
 
 
 
 def home(request):
-    context = {'blogs' : BlogModel.objects.all()}
+    blogs= BlogModel.objects.all().order_by('-created_at')
+    categories = Category.objects.all()
+    if request.method =='POST':
+        search = request.POST.get('search')
+        results = BlogModel.objects.filter(Q(title__icontains=search))                            
+        context =  { 'results': results, 'search': search}
+        return render(request, 'blog/index.html', context)
+    context = {
+                'blogs' : blogs,
+                'categories': categories,
+
+                }
     return render(request, 'blog/home.html',context)
+
+
+def category(request, slug):
+    allblogs = BlogModel.objects.filter(category__slug=slug)
+    categories = Category.objects.all()
+    context =  { 'allblogs': allblogs,
+                'categories': categories,
+                }
+    return render (request, 'blog/home.html', context)
+
 
 
 def register(request):
     return render(request, 'blog/register.html')
 
+def index(request):
+    blogs= BlogModel.objects.all().order_by('-created_at')
+    context = {'blogs' : blogs}
+    return render(request, 'blog/index.html',context)
+
 
 def logout_view(request):
     logout(request)
-    messages.success(request, "logout successfully Complete.")
+    # messages.success(request, "logout successfully Complete.")
     return redirect("login")
 
 def login(request):
@@ -62,6 +89,7 @@ def add_blog(request):
             print(request.FILES)
             image = request.FILES['image']
             title = request.POST.get('title')
+            # category= request.POST.get('catagory')
             user = request.user
             
             if form.is_valid():
@@ -69,6 +97,7 @@ def add_blog(request):
             
             blog_obj = BlogModel.objects.create(
                 user = user , title = title, 
+                # category=category, 
                 content = content, image = image
             )
             print(blog_obj)
@@ -78,6 +107,7 @@ def add_blog(request):
         print(e)
     return render(request , 'blog/add_blog.html', context)
 
+@login_required(login_url='login')
 def blog_delete(request, id):
     blog_obj = get_object_or_404(BlogModel, id=id)
     if request.method == 'POST':
@@ -88,6 +118,7 @@ def blog_delete(request, id):
 
 
 
+@login_required(login_url='login')
 def blog_update(request, slug):
     context = {}
     try:
@@ -116,7 +147,9 @@ def blog_update(request, slug):
     except Exception as e :
         print(e)
     return render(request, 'blog/update_blog.html', context)
-   
+
+
+@login_required(login_url='login')  
 def verify(request,token):
     try:
         profile_obj = Profile.objects.filter(token = token).first()

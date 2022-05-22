@@ -1,35 +1,52 @@
 {% extends "blog/base.html" %}
+{% load static %}
 {% block content %}
 
-<section class="log-body">
-          <div class="glass">
-              <div class="sing-up-form">
-                  <h1 >Welcome To Potato Forum</h1>
-                   <h6 style="font-size: 13px;">Login your account to continue</h6>
-                    <div class="form-group text-left pt-5">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/media/css/login.css">
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center">
+        <div class="col-md-4 text-center company__info">
+            <span class="company__logo">
+                <h2><span class="fa fa-user user-logo"></span></h2>
+            </span>
+            <h4 class="company_title">Bloger Register</h4>
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="container-fluid">
+                <div class="row">
+                    <h2>SignUp</h2>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="row">
+                            <i class="edit-icons fa fa-user" for="loginUsername"></i>
+                            <input class="form__input" name="loginUsername" id="loginUsername" type="email"
+                                placeholder="name@address.com" autocomplete="off" required
+                                data-msg="Please enter your email">
+                        </div>
+                        <div class="row ">
+                            <i class="edit-icons-lock fa fa-lock" for="loginPassword"></i>
+                            <input class="form__input " name="loginPassword" id="loginPassword" placeholder="Password"
+                                type="password" required data-msg="Please enter your password">
 
-                        <!-- <label class="form-label " for="UserFname">Firtst Name</label>
-                        <input class="input-box" name="UserFname" id="UserFname" type="text" placeholder="Enter your name " autocomplete="off" required data-msg="Please enter your Name">
+                        </div>
 
-                        <label class="form-label " for="UserLname">Last Name</label>
-                        <input class="input-box" name="UserLname" id="UserLname" type="text" placeholder="Enter your name " autocomplete="off" required data-msg="Please enter last Name">   -->
+                        <div class="row">
+                            <button type="button" class="login-btn" onclick="register()"> Submit </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <p>Already have an account?<a href="{% url 'login' %}"> login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                        <label class="form-label " for="loginUsername">Email</label>
-                        <input class="input-box" name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email">      
-    
-                        <label class="form-label" for="loginPassword"> Password</label>
-                        <input class="input-box" name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password">
-                    </div>  
-                    <button type="button" class="facebook-btn" onclick="register()"> Sing Up </button>
-                      <hr>
-                      <p class="or" >OR</p>
-                      <a href="https://www.facebook.com/" class="btn with-social"> <span  class="fb-google-login"> <i class=' fa-facebook bx bxl-facebook-circle'></i>  Facebook</span></a>
-                      <a href="https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin" class="btn with-social"><span class="fb-google-login"> <i class="bx bxl-google fa-google"> </i> Google</span></a>
-                      <br>
-                      <p class="agree">Already have an account? <a href="{% url 'login' %}">login hare</a></p>
-                
-              </div>
-          </div>
-      </section>
+<!-- new temlates -->
 
-  {% endblock %}
+
+{% endblock %}

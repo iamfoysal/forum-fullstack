@@ -20,7 +20,7 @@
           <div class="search">
             <form class="search-form" action="" method="POST">
               {% csrf_token %}
-              <input type="text" name="search" class="searchTerm" aria-label="Search" placeholder="What are you looking for?">
+              <input type="text" name="search" class="searchTerm" placeholder="What are you looking for?">
               <button type="submit" class="searchButton">
                 <i class="fa fa-search"></i>
               </button>
@@ -36,16 +36,16 @@
     <main class="main-area">
       <div class="centered">
         <section class="cards">
-          {% for blog in blogs %}
+          {% for result in results %}
           <article class="card hover-animate">
-            <a href="{% url 'blog_detail' blog.slug %}">
-              <img src="/media/{{blog.image}}" alt="meow">
+            <a href="{% url 'blog_detail' result.slug %}">
+              <img src="/media/{{result.image}}" alt="meow">
               <div class="card-content">
-                <h2>{{blog.title}}</h2>
+                <h2>{{result.title}}</h2>
                 <small class="user-and-date"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  {{blog.bloger.username}}</small>
+                  {{result.bloger.username}}</small>
                 <small class="user-and-date"><i class="fa fa-clock-o" aria-hidden="true"></i>
-                  {{blog.created_at}}</small>
+                  {{result.created_at}}</small>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum explicabo consequatur
                   consectetur fugit molestias perferendis</p>
               </div> <!-- .card-content -->
@@ -62,22 +62,15 @@
       <div class="squish-container">
         <form class="search-form" action="" method="POST">
           {% csrf_token %}
-          <input type="text" name="search" class="sidebar-searchTerm" aria-label="Search"  placeholder="search">
+          <input type="taxt" name="search" class="sidebar-searchTerm" placeholder="search">
           <button type="submit" class="sidebar-searchButton ">
             <i class="fa fa-search"></i>
           </button>
       </form>
       <hr>
-        <h3>Catagory:</h3>
+        <h3>Explore the other Demos:</h3>
         <nav class="example-menu">
           <ul>
-            {% for category in categories %}
-            <li >
-                <a class="dropdown-item" href="{% url 'home' %}?category={{category.name}} "target="_blank">
-                    {{category.name}}
-                </a>
-            </li>
-            {% endfor %}
             <li><a href="https://codepen.io/bugsyAlexander/pen/xGBaaG" target="_blank">Mixed Menu</a></li>
             <li><a href="https://codepen.io/bugsyAlexander/pen/gpyYOo" target="_blank">Card Layout</a></li>
             <li><a href="https://codepen.io/bugsyAlexander/pen/OVGLmo" target="_blank">Holy Grail</a></li>

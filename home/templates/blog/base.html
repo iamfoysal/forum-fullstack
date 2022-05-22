@@ -8,64 +8,80 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
-  <!-- Price Slider Stylesheets -->
-  <link rel="stylesheet" href="/media/css/nouislider.css">
-  <!-- Google fonts - Playfair Display-->
+
+  <!-- <link rel="stylesheet" href="/media/css/nouislider.css"> -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
-  <!-- Google fonts - Poppins-->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
-
-  <link rel="stylesheet" href="/media/css/swiper.min.css">
-
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="/media/css/swiper.min.css">
   <link rel="stylesheet" href="/media/css/magnific-popup.css">
-
   <link rel="stylesheet" href="/media/css/default.css" id="theme-stylesheet">
-  <!-- boxicons stylesheet - for your changes-->
-  <link rel="stylesheet" href="/media/css/boxicons.min.css">
-  <!-- login stylesheet - for your changes-->
+  <link rel="stylesheet" href="/media/css/style.css">  
+  <link rel="stylesheet" href="/media/css/boxicons.min.css">  -->
   <link rel="stylesheet" href="/media/css/login.css">
-  <!-- Custom stylesheet - for your changes-->
-  <link rel="stylesheet" href="/media/css/style.css">
+  <link rel="stylesheet" href="/media/css/custom.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="/media/js/main.js"></script>
+
+
 
 
 </head>
 
 <body>
   <input type="hidden" id="csrf" value="{{csrf_token}}">
-  
-    <nav>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="welcome-data">
-            <p class="welcome-maindata"><strong style="color: #f3e0df; padding: 5px;"><i class='bx bx-book-reader'
-                  style="display: inline;"></i>Blog</strong></p>
-          </div>
-        </div>
-      </div>
-      <div class="nav-links" id="navlinks">
-        <i class="bx bx-transfer " onclick="hideMenu()"></i>
+  <div class="main-menu">
+    <div class="nav-mixed menu">
+      <nav id="multi-level-nav" class="multi-level-nav" role="navigation">
         <ul>
           <li><a href="{% url 'home' %}">Home</a></li>
-          {% if request.user.is_authenticated %}
-          <li><a href="{% url 'add_blog' %}"> Add Blog</a></li>
-
-          <li><a href="{% url 'see_blog' %}">Profile</a></li>
-
-          <li><a href="{% url 'logout_view' %}">Logout</a></li>
-          {% else %}
-          <a class="btn btn-primary btn-log-in" href="{% url 'login' %}">SUGNUP/LOGIN</a>
-          {% endif %}
+          <li class="has-children">
+            <a href="#">User<button class="dropdown-toggle" aria-expanded="false"><span
+                  class="screen-reader-text">Expand child menu</span></button></a>
+            <ul class="sub-menu">
+              {% if request.user.is_authenticated %}
+              <li><a href="{% url 'add_blog' %}">Add</a></li>
+              <li><a href="{% url 'see_blog' %}">Profile</a></li>
+              <li><a href="{% url 'logout_view' %}">Logout</a></li>
+              {% else %}
+              <a class="btn btn-primary btn-log-in" href="{% url 'login' %}">SUGNUP/LOGIN</a>
+              {% endif %}
+            </ul>
+          </li>
+          <li class="has-children">
+            <a href="#">Services<button class="dropdown-toggle" aria-expanded="false"><span
+                  class="screen-reader-text">Expand child menu</span></button></a>
+            <ul class="sub-menu">
+              <li><a href="#">Subitem</a></li>
+              <li><a href="#">Subitem</a></li>
+              <li><a href="#">Subitem</a></li>
+              <li><a href="#">Subitem</a></li>
+              <li><a href="#">Subitem</a></li>
+            </ul>
+          </li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Signup</a></li>
         </ul>
-      </div>
-      <i class="bx bx-menu-alt-right " onclick="showMenu()"></i>
-    </nav>
+      </nav><!-- #multi-level-nav .multi-level-nav -->
 
+      <nav id="social-menu" class="social-menu" role="navigation">
+        <ul>
+          <li><a href="https://twitter.com/"><span class="screen-reader-text">Twitter</span></a></li>
+          <li><a href="https://github.com/"><span class="screen-reader-text">Github</span></a></li>
+          <li><a href="https://www.linked"><span class="screen-reader-text">LinkedIn</span></a></li>
+          <li><a href="http://dribbble.com"><span class="screen-reader-text">Dribbble</span></a></li>
+          <li><a href="http://instagram.com"><span class="screen-reader-text">Instagram</span></a></li>
+        </ul>
+      </nav> <!-- .social-menu -->
 
+    </div><!-- .mixed-menu -->
+  </div><!-- main-menu -->
 
   <!--============================Down-to-Up-btn--start ==================================-->
-  <button onclick="topFunction()" id="myBtn" title="Go to top"><i class='bx bx-chevrons-up'></i></button>
+  <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-hand-o-up"
+      aria-hidden="true"></i></button>
   <!--============================Down-to-Up-btn--end ==================================-->
 
   {% block content %}
@@ -90,7 +106,7 @@
 
 
 
-
+<!-- frontend js  -->
 
   <script>
     var navlinks = document.getElementById("navlinks");
@@ -123,7 +139,52 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     }
+
+    // nav items 
+    (function ($) {
+
+      $('.dropdown-toggle').click(function (e) {
+        var _this = $(this);
+        e.preventDefault();
+        _this.toggleClass('toggle-on');
+        _this.parent().next('.sub-menu').toggleClass('toggled-on');
+        _this.attr('aria-expanded', _this.attr('aria-expanded') === 'false' ? 'true' : 'false');
+        _this.html(_this.html() === '<span class="screen-reader-text">Expand child menu</span>' ?
+          '<span class="screen-reader-text">Collapse child menu</span>' :
+          '<span class="screen-reader-text">Expand child menu</span>');
+      });
+
+      // sidebar menu
+      $('a.sidebar-left-toggle').click(function () {
+        if (!$('.sidebar').hasClass('.sidebar-left')) {
+          $('.sidebar').addClass('sidebar-left');
+        }
+      });
+
+      $('a.sidebar-right-toggle').click(function () {
+        if ($('.sidebar').hasClass('sidebar-left')) {
+          $('.sidebar').removeClass('sidebar-left');
+        }
+      });
+
+      $('a.no-sidebar-toggle').click(function () {
+        if (!$('.content').hasClass('no-sidebar')) {
+          $('.content').addClass('no-sidebar');
+        } else {
+          $('.content').removeClass('no-sidebar');
+        }
+      });
+
+      $('a.hide-sidebar-toggle').click(function () {
+        if (!$('.sidebar').hasClass('hide')) {
+          $('.sidebar').addClass('hide');
+        } else {
+          $('.sidebar').removeClass('hide');
+        }
+      });
+    })(jQuery);
   </script>
+
 
 </body>
 

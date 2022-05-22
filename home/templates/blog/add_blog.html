@@ -1,15 +1,21 @@
 {% extends "blog/base.html" %}
 {% block content %}
 
-<div class="container mt-5">
-
-    <a href="{% url 'see_blog' %}" class="btn btn-warning">View Your blogs</a>
-    <form method="post" class="mt-5 pt-5 mb-5 pb-5" enctype="multipart/form-data">
+<div class="add-blog-container mt-5">
+    <div class="bloger-button-item">
+    <a href="{% url 'see_blog' %}" class="blog-button">View Your blogs</a><br><br>
+    </div>
+    <form method="post" class="mt-5 pt-5 mb-5 pb-5 blog-forms" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
+            <h1>Post your Blog</h1>
             <div class="col-md-12">
-                <label>Enter blog title</label>
+                <label>Blog title</label>
                 <input type="text" class="form-control" placeholder="Enter title" name="title">
+            </div>
+            <div class="col-md-12">
+                <label>catagory:</label>
+                <input type="text" class="form-control" placeholder="Enter title" name="category">
             </div>
             <div class="col-md-12">
                 {{form.media}} {{form.as_p}}
@@ -19,7 +25,7 @@
                 <input type="file" name="image" class="py-4">
             </div>
         </div>
-        <button type="submit" style="width: 120px;" class="btn btn-primary float-right  mt-4">Post</button>
+        <button type="submit" class="comment-btn">Post</button>
     </form>
 </div>
 {% endblock %}
