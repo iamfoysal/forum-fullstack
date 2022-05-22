@@ -12,13 +12,12 @@ def home(request):
     categories = Category.objects.all()
     if request.method =='POST':
         search = request.POST.get('search')
-        results = BlogModel.objects.filter(Q(title__icontains=search))                            
+        results = BlogModel.objects.filter(Q(title__icontains=search)|Q(content__icontains=search))                           
         context =  { 'results': results, 'search': search}
         return render(request, 'blog/index.html', context)
     context = {
                 'blogs' : blogs,
                 'categories': categories,
-
                 }
     return render(request, 'blog/home.html',context)
 
@@ -27,7 +26,7 @@ def category(request, slug):
     allblogs = BlogModel.objects.filter(category__slug=slug)
     categories = Category.objects.all()
     context =  { 'allblogs': allblogs,
-                'categories': categories,
+                 'categories': categories,
                 }
     return render (request, 'blog/home.html', context)
 
@@ -89,16 +88,18 @@ def add_blog(request):
             print(request.FILES)
             image = request.FILES['image']
             title = request.POST.get('title')
-            # category= request.POST.get('catagory')
+            category= request.POST.get('title')
             user = request.user
             
             if form.is_valid():
                 content = form.cleaned_data['content']
             
             blog_obj = BlogModel.objects.create(
-                user = user , title = title, 
-                # category=category, 
-                content = content, image = image
+                user = user , 
+                title = title, 
+                category=category, 
+                content = content, 
+                image = image
             )
             print(blog_obj)
             return redirect('/add-blog/')

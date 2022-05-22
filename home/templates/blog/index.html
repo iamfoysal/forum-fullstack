@@ -43,7 +43,7 @@
               <div class="card-content">
                 <h2>{{result.title}}</h2>
                 <small class="user-and-date"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  {{result.bloger.username}}</small>
+                  {{result.user.username}}</small>
                 <small class="user-and-date"><i class="fa fa-clock-o" aria-hidden="true"></i>
                   {{result.created_at}}</small>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum explicabo consequatur
@@ -68,15 +68,18 @@
           </button>
       </form>
       <hr>
-        <h3>Explore the other Demos:</h3>
-        <nav class="example-menu">
-          <ul>
-            <li><a href="https://codepen.io/bugsyAlexander/pen/xGBaaG" target="_blank">Mixed Menu</a></li>
-            <li><a href="https://codepen.io/bugsyAlexander/pen/gpyYOo" target="_blank">Card Layout</a></li>
-            <li><a href="https://codepen.io/bugsyAlexander/pen/OVGLmo" target="_blank">Holy Grail</a></li>
-            <li><a href="https://codepen.io/bugsyAlexander/pen/xGNZao" target="_blank">Site Demo</a></li>
-          </ul>
-        </nav><!-- .example-menu -->
+      <h3>Catagory:</h3>
+      <nav class="example-menu">
+        <ul>
+          {% for category in categories %}
+          <li >
+              <a class="dropdown-item" href="{% url 'home' %}?category={{category.title}} "target="_blank">
+                  {{category.title}}
+              </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav><!-- .example-menu -->
       </div>
     </div><!-- .sidebar -->
   </div><!-- .content -->
