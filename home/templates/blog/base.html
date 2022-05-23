@@ -40,18 +40,20 @@
             </ul>
           </li>
           <li class="has-children">
-            <a href="#">Services<button class="dropdown-toggle" aria-expanded="false"><span
+            <a href="#">Categorys<button class="dropdown-toggle" aria-expanded="false"><span
                   class="screen-reader-text">Expand child menu</span></button></a>
             <ul class="sub-menu">
-              <li><a href="#">Subitem</a></li>
-              <li><a href="#">Subitem</a></li>
-              <li><a href="#">Subitem</a></li>
-              <li><a href="#">Subitem</a></li>
-              <li><a href="#">Subitem</a></li>
+              {% for category in categories %}
+              <li>
+                <a class="dropdown-item" href="{% url 'home' %}?category={{category.name}} " target="_blank">
+                  {{category.name}}
+                </a>
+              </li>
+              {% endfor %}
             </ul>
           </li>
           <li><a href="#">About</a></li>
-          <li><a href="#">Signup</a></li>
+          <li><a href="{% url 'register' %}">Signup</a></li>
         </ul>
       </nav><!-- #multi-level-nav .multi-level-nav -->
 
@@ -78,35 +80,84 @@
 
 
   <!-- Footer-->
-  <footer class="position-relative z-index-10 d-print-none">
 
-    <div class="py-4 font-weight-light bg-gray-800 text-gray-300">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6 text-center text-md-left">
-            <p class="text-sm mb-md-0 text-center">&copy; {% now "Y" %} Your company. All rights reserved.</p>
-          </div>
+  <!--GOOGLE FONTS-->
 
-        </div>
-      </div>
+
+  <!--SECTION5-->
+  <div class="section5">
+    <section>
+      <h1 class="title inline-photo2 show-on-scroll2">Subscribe to our Forum</h1>
+      <p class="inline-photo show-on-scroll">Get latest news on property postings, bankrupt details, new installment
+        scheme.</p>
+    </section>
+    <section>
+      <a class="btn2" href="{% url 'register' %}">Subscribe</a>
+    </section>
+  </div>
+
+
+
+
+  <!--FOOTER-->
+  <footer>
+    <div class="footer">
+      <section>
+        <h3>Forum</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+      </section>
+      <section>
+        <h3>LINKS</h3>
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact Us</a>
+      </section>
+      <section>
+        <h3>OTHER</h3>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Cookie Policy</a>
+      </section>
+      <section>
+        <h3>ANY QUESTIONS?</h3>
+        <a href="emailto:support@websitename.com"><span><i
+              class="fa fa-envelope"></i></span><span>shopybusiness.co@gmail.com</span></a>
+        <a href="tel:xxxxxxxxx"><span><i class="fa fa-phone"></i></span><span>(+880)9638635181-</span></a>
+      </section>
     </div>
   </footer>
+  <div class="sub-footer">
+    &copy; {% now "Y" %} All rights reserved |Forum
+  </div>
 
 
 
 
-<!-- frontend js  -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- frontend js  -->
 
   <script>
-    var navlinks = document.getElementById("navlinks");
+    // var navlinks = document.getElementById("navlinks");
 
-    function showMenu() {
-      navlinks.style.right = "0"
-    }
+    // function showMenu() {
+    //   navlinks.style.right = "0"
+    // }
 
-    function hideMenu() {
-      navlinks.style.right = "-370px"
-    }
+    // function hideMenu() {
+    //   navlinks.style.right = "-370px"
+    // }
 
 
     //Get the button

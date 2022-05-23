@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import BlogModel, Profile, Category
 
 class CatagoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('title',)}
+    prepopulated_fields = {'slug': ('name',)}
     
 
 class PostAdmin(admin.ModelAdmin):

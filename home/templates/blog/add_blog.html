@@ -17,9 +17,9 @@
             <div class="col-md-12">
             <label>Category</label>
                         <select name="category"  class="form-control" id="">
-                            <option value="none"> select category</option>
+                            <option value="none">select category</option>
                             {% for category in categories %}
-                            <option value="{{category.id}}">{{category.title}}</option>
+                            <option value="{{category.id}}">{{category.name}}</option>
                             {% endfor %}
                         </select>
             </div>

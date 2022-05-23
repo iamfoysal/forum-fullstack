@@ -33,9 +33,7 @@ class LoginView(APIView):
             if not Profile.objects.filter(user = check_user).first().is_verified:
                 response['message'] = 'Account is not verified ! \nPlease Check your email and verifi your account'
                 raise Exception('Acount not verified')
-                
-                
-            
+                   
             user_obj = authenticate(username = data.get('username') , password = data.get('password'))
             if user_obj:
                 login(request, user_obj)

@@ -1,5 +1,14 @@
+// message section
+const message = document.querySelector('.message');
 
-// console.log("ss")
+
+if (message) {
+   setTimeout(() => {
+     message.classList.add("message-hide");
+   }, 5000);
+}
+
+// login and register with js 
 function login(){
     var username = document.getElementById('loginUsername').value
     var password = document.getElementById('loginPassword').value
@@ -22,6 +31,7 @@ function login(){
     .then(response => {
         
         if(response.status == 200){
+           
             window.location.href = '/'
             
         }
@@ -41,7 +51,6 @@ function register(){
     if( username == '' && password == ''){
         alert('You must enter both')
     }
-
     var data = {
 
         // 'first_name': userfirstname,
@@ -56,14 +65,13 @@ function register(){
             'Content-Type': 'application/json',
             'X-CSRFToken' : csrf,
         },
-       
+
         body : JSON.stringify(data)
     }).then(result => result.json())
     .then(response => {
         console.log(response)
         if(response.status == 200){
-            
-          
+            window.location.href = '/'
         }
         else{
             alert(response.message)

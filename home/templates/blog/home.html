@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
-{% load filters % }
+{% load custom_filters % }
 {% block content %}
 <div class="outer-wrap">
   <header class="masthead">
@@ -20,16 +20,16 @@
           <div class="search">
             <form class="search-form" action="" method="POST">
               {% csrf_token %}
-              <input type="text" name="search" class="searchTerm" aria-label="Search" placeholder="What are you looking for?">
+              <input type="text" name="search" class="searchTerm" aria-label="Search"
+                placeholder="What are you looking for?">
               <button type="submit" class="searchButton">
                 <i class="fa fa-search"></i>
               </button>
-          </form>
+            </form>
           </div>
         </div> <!-- end serach -->
       </div><!-- .site-title -->
     </div><!-- .centered -->
-
   </header><!-- .masthead -->
 
   <div class="content">
@@ -41,15 +41,21 @@
             <a href="{% url 'blog_detail' blog.slug %}">
               <img src="/media/{{blog.image}}" alt="meow">
               <div class="card-content">
-                <h2>{{blog.title}}</h2>
+                <h2 >{{blog.title}}</h2>
                 <small class="user-and-date"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   {{blog.user.username}}</small>
                 <small class="user-and-date"><i class="fa fa-clock-o" aria-hidden="true"></i>
                   {{blog.created_at}}</small>
-                  <small class="user-and-date"><i class="fa fa-clock-o" aria-hidden="true"></i>
-                    {{blog.category.title}}</small>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum explicabo consequatur
-                  consectetur fugit molestias perferendis</p>
+                <small class="user-and-date"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                  {{blog.category.name}}</small>
+                 <!-- <p style="
+                  width: 250px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;"
+                >{{blog.content|safe}}</p>   -->
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio blanditiis soluta harum
+                  veritatis modi maxime autem neque, molestiae dolorum dolor.</p>
               </div> <!-- .card-content -->
             </a>
           </article><!-- .card -->
@@ -62,20 +68,20 @@
       <div class="squish-container">
         <form class="search-form" action="" method="POST">
           {% csrf_token %}
-          <input type="text" name="search" class="sidebar-searchTerm" aria-label="Search"  placeholder="search">
+          <input type="text" name="search" class="sidebar-searchTerm" aria-label="Search" placeholder="search">
           <button type="submit" class="sidebar-searchButton ">
             <i class="fa fa-search"></i>
           </button>
-      </form>
-      <hr>
+        </form>
+        <hr>
         <h3>Catagory:</h3>
         <nav class="example-menu">
           <ul>
             {% for category in categories %}
-            <li >
-                <a class="dropdown-item" href="{% url 'home' %}?category={{category.title}} "target="_blank">
-                    {{category.title}}
-                </a>
+            <li>
+              <a class="dropdown-item" href="{% url 'home' %}?category={{category.name}} " target="_blank">
+                {{category.name}}
+              </a>
             </li>
             {% endfor %}
           </ul>
@@ -91,13 +97,13 @@
 
 
 <!-- Pagination -->
-<div class="col">
+<div class="">
   <div aria-label="Blog pagination">
-    <ul class="pagination justify-content-between mb-5">
-      <li class="page-item"><a class="page-link text-sm rounded" href="#"> <i class="fa fa-chevron-left mr-1"></i>Older
+    <ul class="">
+      <li class=""><a class="page-link text-sm rounded" href="#"> <i class="fa fa-chevron-left "></i>Older
           posts</a></li>
-      <li class="page-item disabled"><a class="page-link text-sm rounded" href="#" tabindex="-1">Newer posts
-          <i class="fa fa-chevron-right ml-1"></i></a></li>
+      <li class=""><a class="" href="#" tabindex="-1">Newer posts
+          <i class="fa fa-chevron-right "></i></a></li>
     </ul>
   </div>
 </div>

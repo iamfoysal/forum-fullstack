@@ -1,9 +1,6 @@
 {% extends "blog/base.html" %}
 {% block content %}
-
-
 <section class="container">
-
   <div class="post-details">
     <h1 class="post-details-title"> {{blog_obj.title}} </h1>
     {% if request.user.is_authenticated %}

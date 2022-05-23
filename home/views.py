@@ -43,7 +43,6 @@ def index(request):
 
 def logout_view(request):
     logout(request)
-    # messages.success(request, "logout successfully Complete.")
     return redirect("login")
 
 def login(request):
@@ -80,15 +79,16 @@ def see_blog(request):
 
 @login_required(login_url='login')
 def add_blog(request):
+    categories = Category.objects.all()
+    context = {'form' : BlogForm, 'categories': categories}
     
-    context = {'form' : BlogForm}
     try:
         if request.method == 'POST':
             form = BlogForm(request.POST)
             print(request.FILES)
             image = request.FILES['image']
             title = request.POST.get('title')
-            category= request.POST.get('title')
+            category= request.POST.get('name')
             user = request.user
             
             if form.is_valid():
@@ -101,6 +101,7 @@ def add_blog(request):
                 content = content, 
                 image = image
             )
+            messages.success(request, "Congratulations! Post Complete.")
             print(blog_obj)
             return redirect('/add-blog/')
             
@@ -113,6 +114,7 @@ def blog_delete(request, id):
     blog_obj = get_object_or_404(BlogModel, id=id)
     if request.method == 'POST':
         blog_obj.delete()
+        messages.success(request, "Post Delete Comleted!")
         return redirect('see_blog')
     context ={'blog_obj': blog_obj}
     return render (request, 'blog/delete.html', context)
@@ -158,6 +160,7 @@ def verify(request,token):
         if profile_obj:
             profile_obj.is_verified = True
             profile_obj.save()
+            messages.success(request, f"Your account successfully Verifyed!")
         return redirect('/login/')
 
     except Exception as e : 

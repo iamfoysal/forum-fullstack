@@ -3,8 +3,8 @@ from django import template
 register = template.Library()
 
 
-# @register.filter()
-def ragne_filters(value):
+@register.filter("text_filters")
+def text_filters(value):
     return value [0:150] + "......"
 
-register.filter('ragne_filters', ragne_filters)
+# register.filter('ragne_filters', ragne_filters)
