@@ -4,12 +4,14 @@ from .form import *
 from django.db.models import Q
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 
 def home(request):
     blogs= BlogModel.objects.all().order_by('-created_at')
     categories = Category.objects.all()
+
     if request.method =='POST':
         search = request.POST.get('search')
         results = BlogModel.objects.filter(Q(title__icontains=search)|Q(content__icontains=search))                           
