@@ -1,0 +1,111 @@
+{% extends "blog/base.html" %}
+{% load custom_filters % }
+{% block content %}
+<div class="outer-wrap">
+  <header class="masthead">
+    <div class="sidebar-switcher">
+      Select layout: <a href="#" class="sidebar-left-toggle"><i class="fa fa-align-left"></i><span
+          class="screen-reader-text">Move sidebar to the left</span></a> <a href="#" class="sidebar-right-toggle"><i
+          class="fa fa-align-right"></i><span class="screen-reader-text">Move sidebar to the right</span></a> <a
+        href="#" class="no-sidebar-toggle"><i class="fa fa-align-justify"></i><span class="screen-reader-text">Display
+          content vertically</span></a> <a href="#" class="hide-sidebar-toggle"><i
+          class="fa fa-arrow-circle-right"></i><span class="screen-reader-text">Remove sidebar</span></a>
+    </div><!-- .sidebar-switcher -->
+
+    <div class="centered">
+      <div class="site-branding">
+        <h5 class="site-title">Search Here</h5>
+        <!-- search -->
+        <div class="wrap">
+          <div class="search">
+            <form class="search-form" action="" method="POST">
+              {% csrf_token %}
+              <input type="text" name="search" class="searchTerm" aria-label="Search"
+                placeholder="What are you looking for?">
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
+          </div>
+        </div> <!-- end serach -->
+      </div><!-- .site-title -->
+    </div><!-- .centered -->
+  </header><!-- .masthead -->
+
+  <div class="content">
+    <main class="main-area">
+      <div class="centered">
+        <section class="cards">
+          {% for blog in allblogs %}
+          <article class="card hover-animate">
+            <a href="{% url 'blog_detail' blog.slug %}">
+              <img src="/media/{{blog.image}}" alt="meow">
+              <div class="card-content">
+                <h2 >{{blog.title}}</h2>
+                <small class="user-and-date"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  {{blog.user.username}}</small>
+                <small class="user-and-date"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                  {{blog.created_at}}</small>
+                <small class="user-and-date"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                  {{blog.category.name}}</small>
+                 <!-- <p style="
+                  width: 250px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;"
+                >{{blog.content|safe}}</p>   -->
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio blanditiis soluta harum
+                  veritatis modi maxime autem neque, molestiae dolorum dolor.</p>
+              </div> <!-- .card-content -->
+            </a>
+          </article><!-- .card -->
+          {% endfor %}
+        </section><!-- .cards -->
+      </div><!-- .centered -->
+    </main><!-- main-area -->
+
+    <div class="sidebar">
+      <div class="squish-container">
+        <form class="search-form" action="" method="POST">
+          {% csrf_token %}
+          <input type="text" name="search" class="sidebar-searchTerm" aria-label="Search" placeholder="search">
+          <button type="submit" class="sidebar-searchButton ">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+        <hr>
+        <h3>Catagory:</h3>
+        <nav class="example-menu">
+          <ul>
+            {% for category in categories %}
+            <li>
+              <a class="dropdown-item" href="{% url 'category' category.slug %} " >
+                {{category.name}}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </nav><!-- .example-menu -->
+      </div>
+    </div><!-- .sidebar -->
+  </div><!-- .content -->
+
+
+</div><!-- .outer-wrap -->
+
+
+
+
+<!-- Pagination -->
+<div class="">
+  <div aria-label="Blog pagination">
+    <ul class="">
+      <li class=""><a class="page-link text-sm rounded" href="#"> <i class="fa fa-chevron-left "></i>Older
+          posts</a></li>
+      <li class=""><a class="" href="#" tabindex="-1">Newer posts
+          <i class="fa fa-chevron-right "></i></a></li>
+    </ul>
+  </div>
+</div>
+</section>
+{% endblock %}

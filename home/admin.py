@@ -1,6 +1,7 @@
-from gettext import Catalog
 from django.contrib import admin
-from .models import BlogModel, Profile, Category
+
+from .models import BlogModel, Category, Profile
+
 
 class CatagoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}

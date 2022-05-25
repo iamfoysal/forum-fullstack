@@ -79,7 +79,7 @@
           <ul>
             {% for category in categories %}
             <li>
-              <a class="dropdown-item" href="{% url 'home' %}?category={{category.name}} " target="_blank">
+              <a class="dropdown-item" href="{% url 'category' category.slug %} " >
                 {{category.name}}
               </a>
             </li>
@@ -97,7 +97,7 @@
 
 
 <!-- Pagination -->
-<div class="">
+<!-- <div class="">
   <div aria-label="Blog pagination">
     <ul class="">
       <li class=""><a class="page-link text-sm rounded" href="#"> <i class="fa fa-chevron-left "></i>Older
@@ -106,6 +106,24 @@
           <i class="fa fa-chevron-right "></i></a></li>
     </ul>
   </div>
+</div> -->
+
+<div class="pagination">
+  <span class="step-links">
+      {% if blogs.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ blogs.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
+      </span>
+
+      {% if blogs.has_next %}
+          <a href="?page={{ blogs.next_page_number }}">next</a>
+          <a href="?page={{ blogs.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+  </span>
 </div>
 </section>
 {% endblock %}

@@ -1,22 +1,31 @@
-from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import login_required
-from .form import *
-from django.db.models import Q
-from django.contrib.auth import logout
 from django.contrib import messages
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Q
+from django.shortcuts import get_object_or_404, redirect, render
 
+from .form import *
 
 
 def home(request):
-    blogs= BlogModel.objects.all().order_by('-created_at')
+    # blogs= BlogModel.objects.all().order_by('-created_at')
+    # blogs = BlogModel.objects.filter(category__slug=slug)
     categories = Category.objects.all()
 
     if request.method =='POST':
         search = request.POST.get('search')
         results = BlogModel.objects.filter(Q(title__icontains=search)|Q(content__icontains=search))                           
-        context =  { 'results': results, 'search': search}
+        context =  { 'results': results, 'search': search,'categories': categories}
         return render(request, 'blog/index.html', context)
+
+    #pagination
+    blog_pagi= BlogModel.objects.all()
+    paginator = Paginator(blog_pagi, 3)
+    page_number = request.GET.get('page')
+    blogs = paginator.get_page(page_number)
+
+
     context = {
                 'blogs' : blogs,
                 'categories': categories,
@@ -30,7 +39,7 @@ def category(request, slug):
     context =  { 'allblogs': allblogs,
                  'categories': categories,
                 }
-    return render (request, 'blog/home.html', context)
+    return render (request, 'blog/category.html', context)
 
 
 
@@ -90,12 +99,15 @@ def add_blog(request):
             print(request.FILES)
             image = request.FILES['image']
             title = request.POST.get('title')
-            category= request.POST.get('name')
+            category_id= request.POST.get('category')
+            print("category paici", category_id)
             user = request.user
            
             if form.is_valid():
                 content = form.cleaned_data['content']
-            
+
+            category = Category.objects.filter(id=category_id).first()
+            print("category last = ", category)
             blog_obj = BlogModel.objects.create(
                 user = user, 
                 title = title, 

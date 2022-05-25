@@ -73,7 +73,7 @@
         <ul>
           {% for category in categories %}
           <li >
-              <a class="dropdown-item" href="{% url 'home' %}?category={{category.name}} "target="_blank">
+              <a class="dropdown-item" href="{% url 'category' category.slug %}">
                   {{category.name}}
               </a>
           </li>
