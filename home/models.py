@@ -31,6 +31,9 @@ class BlogModel(models.Model):
     
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name_plural= 'All Blogs' 
     
     def save(self , *args, **kwargs): 
         self.slug = generate_slug(self.title)
@@ -46,7 +49,8 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user)
 
-
+    class Meta:
+            verbose_name_plural= 'Profile Verification' 
 
 
 

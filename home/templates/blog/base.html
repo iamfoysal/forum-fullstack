@@ -53,7 +53,11 @@
             </ul>
           </li>
           <li><a href="#">About</a></li>
+          {% if request.user.is_authenticated %}
+          
+          {% else %}
           <li><a href="{% url 'register' %}">Signup</a></li>
+          {% endif %}
         </ul>
       </nav><!-- #multi-level-nav .multi-level-nav -->
 

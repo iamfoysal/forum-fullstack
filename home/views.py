@@ -90,12 +90,12 @@ def add_blog(request):
             title = request.POST.get('title')
             category= request.POST.get('name')
             user = request.user
-            
+           
             if form.is_valid():
                 content = form.cleaned_data['content']
             
             blog_obj = BlogModel.objects.create(
-                user = user , 
+                user = user, 
                 title = title, 
                 category=category, 
                 content = content, 
