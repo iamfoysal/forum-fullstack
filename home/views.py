@@ -15,13 +15,14 @@ def home(request):
 
     if request.method =='POST':
         search = request.POST.get('search')
-        results = BlogModel.objects.filter(Q(title__icontains=search)|Q(content__icontains=search))                           
+        results = BlogModel.objects.filter(Q(title__icontains=search)|Q(sub_title__icontains=search))                           
+        # results = BlogModel.objects.filter(Q(title__icontains=search)|Q(content__icontains=search))                           
         context =  { 'results': results, 'search': search,'categories': categories}
         return render(request, 'blog/index.html', context)
 
     #pagination
-    blog_pagi= BlogModel.objects.all()
-    paginator = Paginator(blog_pagi, 3)
+    blog_pagi= BlogModel.objects.all().order_by('-created_at')
+    paginator = Paginator(blog_pagi, 10)
     page_number = request.GET.get('page')
     blogs = paginator.get_page(page_number)
 
@@ -99,8 +100,9 @@ def add_blog(request):
             print(request.FILES)
             image = request.FILES['image']
             title = request.POST.get('title')
+            sub_title = request.POST.get('sub-title')
             category_id= request.POST.get('category')
-            print("category paici", category_id)
+            # print("i find category ", category_id)
             user = request.user
            
             if form.is_valid():
@@ -111,6 +113,7 @@ def add_blog(request):
             blog_obj = BlogModel.objects.create(
                 user = user, 
                 title = title, 
+                sub_title =sub_title,
                 category=category, 
                 content = content, 
                 image = image
@@ -137,7 +140,7 @@ def blog_delete(request, id):
 
 @login_required(login_url='login')
 def blog_update(request, slug):
-    context = {}
+    categories = Category.objects.all()
     try:
         blog_obj = BlogModel.objects.get(slug = slug)
 
@@ -150,6 +153,8 @@ def blog_update(request, slug):
             form = BlogForm(request.POST)
             blog_obj.image = request.FILES['image']
             blog_obj.title = request.POST.get('title')
+            blog_obj.sub_title = request.POST.get('sub-title')
+            blog_obj.category_id= request.POST.get('category')
             blog_obj.user = request.user  
         
             if form.is_valid():
@@ -158,8 +163,8 @@ def blog_update(request, slug):
             messages.success(request, f"Blog updated successfully!")
             return redirect('/')
         
-        context['blog_obj'] = blog_obj
-        context['form'] = form
+        context = {'blog_obj':blog_obj,'form':form, 'categories':categories }
+        
     
     except Exception as e :
         print(e)

@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
 from froala_editor.fields import FroalaField
@@ -20,8 +21,9 @@ class Category (models.Model):
 
 
 class BlogModel(models.Model):
-    title = models.CharField(max_length=1000)
+    title = models.CharField(max_length=1000,null=True , blank=True)
     slug = models.SlugField(max_length=1000, unique=True, null=True , blank=True)
+    sub_title =models.CharField(max_length=1000, null=True , blank=True)
     content = FroalaField()
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='blog')
@@ -31,6 +33,9 @@ class BlogModel(models.Model):
     
     def __str__(self):
         return self.title
+        
+    # def summary(self):
+    #     return self.content[:30]+"...."
 
     class Meta:
         verbose_name_plural= 'All Blogs' 

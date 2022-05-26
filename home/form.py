@@ -6,6 +6,8 @@ class BlogForm(forms.ModelForm):
     class Meta:
         model = BlogModel
         fields = ['content']
+        
+
 
 # class CommentForm(forms.ModelForm):
 #     class Meta:

@@ -8,18 +8,17 @@
         {% csrf_token %}
         <div class="row">
             <div class="col-md-12">
-                <label>Enter blog title</label>
-                <input 
-                    type="text" 
-                    value="{{blog_obj.title}}"
-                    style="padding: 15px; color: black;  border-radius: 5px ; font-size: 20px;"
-                    placeholder="Enter title"
-                    name="title">
+                <label> Update Blog Title</label>
+                <input type="text" value="{{blog_obj.title}}" class="form-control" placeholder="Enter title" name="title">
+            </div>
+            <div class="col-md-12">
+                <label>Update Sub Title</label>
+                <input type="text" value="{{blog_obj.sub_title}}" class="form-control" placeholder="Enter title" name="sub-title">
             </div>
             <div class="col-md-12">
                 <label>Category</label>
                             <select name="category"  class="form-control" id="">
-                                <option value="none">select category</option>
+                                <option value="none">Update category</option>
                                 {% for category in categories %}
                                 <option value="{{category.id}}">{{category.name}}</option>
                                 {% endfor %}

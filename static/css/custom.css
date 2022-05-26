@@ -1,6 +1,7 @@
 /*--------------------------------------------------------------
 Accessibility
 --------------------------------------------------------------*/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 /*CUSTOM SCROLL BAR*/
 *,html{
@@ -230,7 +231,7 @@ Flexbox styles
     order: 1;
   }
   .sidebar {
-    flex: 0 0 12em;
+    flex: 0 0 14em;
     order: 2;
   }
   .sidebar-left {
@@ -542,7 +543,6 @@ Flexbox card styles
 /* search */
 
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 body{
   /* background: #f2f2f2; */
@@ -946,6 +946,12 @@ body{
   }
   }
   
+  .truncate {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   /*FOOTER*/
   .footer{
