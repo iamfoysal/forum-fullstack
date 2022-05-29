@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% block title %} {{blog_obj.title}} {% endblock %}
 {% block content %}
 <section class="container">
   <div class="post-details">
@@ -20,7 +21,7 @@
       <img class="post-dp" src="/media/{{blog_obj.image}}" alt="">
     </div>
     <div class="post-word post-dp">
-      <!-- <p >{{blog_obj.sub_title}}</p> -->
+      <p >{{blog_obj.sub_title}}</p> 
       {{blog_obj.content|safe}}
 
       <div class="user-profile">
