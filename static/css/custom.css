@@ -787,7 +787,7 @@ body{
 }
 .blog-button{
   background: #016ba8;
-  width: 10rem;
+  width: 11rem;
   text-decoration: none;
   color: #fff;
   padding: 10px 10px;
@@ -800,6 +800,7 @@ body{
   transition: 1s all;
   font-size: 10px;
   border-radius: 5px;
+  float: right;
   
 }
 .bloger-button-item{
@@ -1015,4 +1016,75 @@ body{
   }
   }
   
+
+  /* sidebar social icon  */
+
+
+
+a,
+a:hover, a:focus {
+    text-decoration: none;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: white;
+    background: red;
+}
+
+::selection {
+    color: white;
+    background: red;
+}
+
+.side-social-link {
+  position: fixed;
+  top: 43%;
+  z-index: 999;
+  margin-left: -35px;
+}
+
+.side-social-link ul {
+    position: absolute;
+    top: 0;
+    left: -19px;
+}
+
+.main-menu-area {
+    position: absolute;
+    z-index: 3;
+    width:100%;
+}
+
+.side-social-link ul li a {
+    color: #f1f1f1;
+    font-size: 20px;
+    background: #e74c3c;
+    padding: 10px 15px;
+    display: block;
+    margin-bottom: 2px;
+    transition: .4s;
+}
+
+.side-social-link ul li a:hover {
+    margin-left: 0px;
+    transform: translate(20px);
+}
+
+.side-social-link ul {
+    top: 35%;
+    list-style: none;
+    z-index: 3;
+}
+@media (max-width:820px){
+
+  .side-social-link {
+    display: none;
+}
+  }
+
+  /* side bar end */
+
+
+
   
