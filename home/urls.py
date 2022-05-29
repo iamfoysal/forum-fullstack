@@ -10,7 +10,6 @@ urlpatterns = [
   path('logout-view/' , views.logout_view, name="logout_view"),
   path('add-blog/', views.add_blog, name='add_blog'),
   # path("comment/<int:pk>/", views.blog_comment, name="blog-comment"),
-  # path("<int:id>/",views.add_blog, name= "blog_update"),
   path('blog_detail/<slug>' , views.blog_detail, name="blog_detail"),
   path('see-blog/' , views.see_blog, name="see_blog"),
   path('blog-delete/<id>' , views.blog_delete, name="blog_delete"),

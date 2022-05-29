@@ -1,8 +1,6 @@
-from pyexpat import model
-from django.db import models
-from django.contrib.auth.models import User
 from froala_editor.fields import FroalaField
-from django.utils import timezone
+from django.contrib.auth.models import User
+from django.db import models
 from .helpers import * 
 
 
@@ -47,7 +45,7 @@ class BlogModel(models.Model):
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User , on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_verified = models.BooleanField(default=False)
     token = models.CharField(max_length=100)
 

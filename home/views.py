@@ -1,10 +1,9 @@
-from django.contrib import messages
-from django.contrib.auth import logout
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect, render
-
 from .form import *
 
 
@@ -59,7 +58,6 @@ def logout_view(request):
 
 def login(request):
     return render(request, 'blog/login.html')
-
 
 
 
@@ -131,11 +129,10 @@ def blog_delete(request, id):
     blog_obj = get_object_or_404(BlogModel, id=id)
     if request.method == 'POST':
         blog_obj.delete()
-        messages.success(request, "Post Delete Comleted!")
+        messages.success(request, "Post Delete Completed!")
         return redirect('see_blog')
     context ={'blog_obj': blog_obj}
     return render (request, 'blog/delete.html', context)
-
 
 
 @login_required(login_url='login')
@@ -146,7 +143,7 @@ def blog_update(request, slug):
 
         if blog_obj.user != request.user:
             return redirect('/') 
-    
+
         initial_dict = {'content': blog_obj.content}
         form = BlogForm(initial = initial_dict)
         if request.method == 'POST':
@@ -172,14 +169,13 @@ def blog_update(request, slug):
 
 
 @login_required(login_url='login')  
-def verify(request,token):
+def verify(request, token):
     try:
         profile_obj = Profile.objects.filter(token = token).first()
-        
         if profile_obj:
             profile_obj.is_verified = True
             profile_obj.save()
-            messages.success(request, f"Your account successfully Verifyed!")
+            # messages.success(request, f"Your account successfully Verifyed!")
         return redirect('/login/')
 
     except Exception as e : 
