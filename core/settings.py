@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'froala_editor',
     'home',
     'rest_framework',
+    'django_social_share',
 
 ]
 

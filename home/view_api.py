@@ -31,7 +31,7 @@ class LoginView(APIView):
                 raise Exception('invalid username not found')
             
             if not Profile.objects.filter(user = check_user).first().is_verified:
-                response['message'] = 'Account is not verified ! \nPlease Check your email and verifi your account'
+                # response['message'] = 'Account is not verified ! \nPlease Check your email and verifi your account'
                 raise Exception('Acount not verified')
                    
             user_obj = authenticate(username = data.get('username') , password = data.get('password'))
@@ -88,8 +88,8 @@ class RegisterView(APIView):
             user_obj.save()
             
             token = generate_random_string(20)
-            Profile.objects.create(user = user_obj , token = token)
-            send_mail_to_user(token , data.get('username'))
+            Profile.objects.create(user = user_obj, token = token)
+            send_mail_to_user(token, data.get('username'))
             response['message'] = 'User created'
             response['status'] = 200
             

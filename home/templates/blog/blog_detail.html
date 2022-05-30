@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load social_share %}
 {% block title %} {{blog_obj.title}} {% endblock %}
 {% block content %}
 <section class="container">
@@ -26,8 +27,14 @@
 
       <div class="user-profile">
         <ul class="post-times">
-          <li><a class="post-item" href="#"><i class="fa fa-comment" aria-hidden="true"></i> 10 Comments</a></li>
-          <li><a class="post-item" href="#"><i class="fa fa-share" aria-hidden="true"></i> Share</a></li>
+          <li><a  class="post-item" href="#"><i class="fa fa-comment" aria-hidden="true"></i> 10 Comments</a></li>
+          <li><a  class="post-item" href="#"><i class="fa fa-share" aria-hidden="true"></i> Share with:</a></li>
+          <li><a  class="post-item" href="" ><i class="fa fa-facebook"></i></a></li>
+          <li><a  class="post-item" href="#"><i class="fa fa-twitter"></i></a></li>
+          <li class="post-item" >{% post_to_facebook "New Song: awesome song. Check it out!" object_or_url " Facebook!" %}</li>
+          <li class="post-item" >{% post_to_twitter "New Song: awesome song. Check it out!" object_or_url "Twitter" %}</li>
+          <li class="post-item" >{% post_to_linkedin  object_or_url  "linkedin" %}</li>
+          <li><a  class="post-item" href="#"><i class="fa fa-linkedin"></i></a></li>
         </ul>
       </div>
 

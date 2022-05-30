@@ -954,6 +954,26 @@ body{
     text-overflow: ellipsis;
   }
 
+  /* Pagination*/
+  .pagination{
+    display: block;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.step-links{
+  padding: 10px;
+
+}
+.pagination a{
+    background: #266fcb;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+
   /*FOOTER*/
   .footer{
   background-color:var(--dark);
@@ -1039,7 +1059,7 @@ a:hover, a:focus {
 
 .side-social-link {
   position: fixed;
-  top: 43%;
+  top: 35%;
   z-index: 999;
   margin-left: -35px;
 }

@@ -4,19 +4,14 @@ from django.db import models
 from .helpers import * 
 
 
-
-
 class Category (models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=255, unique=True)
    
-
     def __str__(self):
         return self.name
-
     class Meta:
         verbose_name_plural= 'Categories'   
-
 
 class BlogModel(models.Model):
     title = models.CharField(max_length=1000,null=True , blank=True)
