@@ -179,11 +179,7 @@ Base styles
   color: white;
 }
 
-.footer-area {
-  padding: .4em 1em;
-  text-align: center;
-  background: hsl(0, 0%, 75%);
-}
+
 
 /* Sidebar switcher buttons */
 @media screen and (max-width: 40em) {
@@ -1109,5 +1105,21 @@ a:hover, a:focus {
   /* side bar end */
 
 
-
+/* comment button  */
+.comment-button-clear{
+  margin-left: 0;
+}
+.comment-button-submit{
+  margin-left: 5%;
+}
+.comment-button{
+  display: inline-block;
+  border: none;
+  padding: 8px;
+}  
+.comment-button:hover{
+  background: #e5e7eb;
+  color: #000;
+  border-radius: 5px;
   
+}

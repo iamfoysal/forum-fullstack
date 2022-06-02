@@ -32,12 +32,11 @@
           <hr>
           <li><a class="post-item" href="#"><i class="fa fa-comment" aria-hidden="true"></i> {{ total_comment}}</a></li>
           <li><a class="post-item" href="#"><i class="fa fa-share" aria-hidden="true"></i> Share with:</a></li>
-          <li><a class="post-item" href=""><i class="fa fa-facebook"></i></a></li>
-          <li><a class="post-item" href="#"><i class="fa fa-twitter"></i></a></li>
+        
           <li class="post-item">{% post_to_facebook "Check it out!" object_or_url " Facebook!" %}</li>
           <li class="post-item">{% post_to_twitter "Check it out!" object_or_url "Twitter" %}</li>
           <li class="post-item">{% post_to_linkedin  object_or_url  "linkedin" %}</li>
-          <li><a class="post-item" href="#"><i class="fa fa-linkedin"></i></a></li>
+          
         </ul>
       </div>
 <br><br>
@@ -67,25 +66,6 @@
 
       <div class="">
         <a href="{% url 'blog_detail' blog_obj.slug %}" class="btn btn-info">Add a commnet</a>
-        <!-- <h2 class="">Add a comment</h2>
-        <form action="" method="post">
-      
-        {% csrf_token %}
-          {% for field in form %}
-          <div class="mb-3">
-            <label for="{{ field.id }}" class="">{{ field.label_tag }}</label>
-            {{ field }}
-          </div>
-
-          <div class="">{{ field.errors }}</div>
-          {% endfor %}
-
-          <div class="">
-            <button type="reset" class="inline-block ">Clear</a>
-            <button type="submit"
-                class="inline-block btn-info">Submit</button>
-          </div>
-        </form> -->
       </div>
     <hr class="hr-custom">
 </section>
