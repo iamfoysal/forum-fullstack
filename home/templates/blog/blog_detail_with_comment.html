@@ -11,7 +11,7 @@
     <a class="user-and-date"><i class="fa fa-pencil-square-o" aria-hidden="true"> </i> {{blog_obj.user.username}} </a>
     {% else %}
     {% endif %}
-    <time class="user-and-date"> <i class="fa fa-clock-o" aria-hidden="true"></i> {{blog_obj.created_at |timesince}}</time>
+    <time class="user-and-date"> <i class="fa fa-clock-o" aria-hidden="true"></i> {{blog_obj.created_at}}</time>
     <div class="post-details-menu">
       <a href="{% url 'home' %}" style="color: rgb(228, 94, 17);"><i class='bx bx-home'></i>Home </a>
       {% if request.user.is_authenticated %}
@@ -29,7 +29,7 @@
 
       <div class="user-profile">
         <ul class="post-times">
-          <li><a class="post-item" href="#"><i class="fa fa-comment" aria-hidden="true"></i> 10 Comments</a></li>
+          <li><a class="post-item" href="#"><i class="fa fa-comment" aria-hidden="true"></i> {{ total_comment}}</a></li>
           <li><a class="post-item" href="#"><i class="fa fa-share" aria-hidden="true"></i> Share with:</a></li>
           <li><a class="post-item" href=""><i class="fa fa-facebook"></i></a></li>
           <li><a class="post-item" href="#"><i class="fa fa-twitter"></i></a></li>
@@ -39,7 +39,7 @@
           <li><a class="post-item" href="#"><i class="fa fa-linkedin"></i></a></li>
         </ul>
       </div>
-<br><br><br><br><br><br><br>
+<br><br>
 
 
 
@@ -49,16 +49,12 @@
 
       {% if comments %}
         <h2 class="">All Comments</h2>
-        <ul class="space-y-4 ml-3">
+
+        <ul class="space-y-4">
           {% for comment in comments %}
-          <div class="">
-            <!-- <img class="rounded-circle" src=" {{comment}} " alt=""> -->
-            <h5 class="text-info inline-block"> {{ comment.author }} </h5>
-            <small class="inline-block">{{ comment.commented_at|timesince }} ago</small>
-          </div>
           <li class="">
-            {{ comment }}
-            
+            {{ comment }} by {{ comment.author }} -
+            <small class="">{{ comment.created_at|timesince }} ago</small>
             {% if request.user == comment.author %}
             <div class="mt-3">
               <a href="#" class="">Edit</a>
@@ -73,7 +69,8 @@
       {% endif %}
 
       <div class="">
-        <h2 class="">Add a comment</h2>
+        <a href="{% url 'blog_detail' blog_obj.slug %}" class="btn btn-info">Add a commnet</a>
+        <!-- <h2 class="">Add a comment</h2>
         <form action="" method="post">
       
         {% csrf_token %}
@@ -91,7 +88,7 @@
             <button type="submit"
                 class="inline-block btn-info">Submit</button>
           </div>
-        </form>
+        </form> -->
       </div>
     <hr class="hr-custom">
 </section>
