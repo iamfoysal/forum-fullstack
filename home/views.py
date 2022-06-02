@@ -1,15 +1,15 @@
-from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 from django.contrib import messages
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import Category,BlogModel,Profile,Comments
 from .form import BlogForm, CommentForm
 from django.contrib.auth.models import User
 
+from django.shortcuts import get_object_or_404, redirect, render
 
-
+from .form import *
 def home(request):
     # blogs= BlogModel.objects.all().order_by('-created_at')
     # blogs = BlogModel.objects.filter(category__slug=slug)
@@ -39,9 +39,10 @@ def home(request):
 def category(request, slug):
     allblogs = BlogModel.objects.filter(category__slug=slug)
     categories = Category.objects.all()
-    context =  { 'allblogs': allblogs,
-                 'categories': categories,
-                }
+    context =  { 
+                'allblogs': allblogs,
+                'categories': categories,
+        }
     return render (request, 'blog/category.html', context)
 
 
