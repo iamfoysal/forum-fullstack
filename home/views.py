@@ -205,28 +205,13 @@ def verify(request, token):
     try:
         profile_obj = Profile.objects.filter(token = token).first()
         if profile_obj:
-            profile_obj.is_verified = True
-            profile_obj.save()
+           profile_obj.is_verified=True
+           profile_obj.save()
             # messages.success(request, f"Your account successfully Verifyed!")
-        return redirect('login/')
+        return redirect('/login/')
 
     except Exception as e : 
         print(e)
     
     return redirect('/')
 
-# def comments(request, pk):
-#     form = CommentForm()
-#     comments = get_object_or_404(BlogModel, pk=pk)
-
-#     if request.method == 'POST':
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             comment = form.save(commit=False)
-#             comment.blog = comments
-#             comment.user = request.user.profile
-#             comment.save()
-#             messages.success(request, "Comment added successfully.")
-        
-#     context = {'comments': comments,'form': form,}
-#     return render(request, 'blog/blog_detail.html', context )
