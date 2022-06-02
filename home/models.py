@@ -52,11 +52,11 @@ class Profile(models.Model):
 
 
 
-# class Comment(models.Model):
-#     comments = models.TextField()
-#     item = models.ForeignKey(BlogModel, on_delete=models.CASCADE, null=True, blank="True")
-#     author = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank="True")
-#     created_at = models.DateTimeField(auto_now_add=True)
+class Comments(models.Model):
+    body = models.TextField()
+    feed = models.ForeignKey(BlogModel,  on_delete=models.CASCADE, null=True, blank="True")
+    # author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank="True")
+    created_at = models.DateTimeField(auto_now_add=True)
 
-#     def __str__(self):
-#         return self.body
+    def __str__(self):
+        return self.body

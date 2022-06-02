@@ -1,5 +1,5 @@
 from django import forms
-from froala_editor.widgets import FroalaEditor
+from django.forms import ModelForm
 from .models import *
 
 class BlogForm(forms.ModelForm):
@@ -9,14 +9,15 @@ class BlogForm(forms.ModelForm):
         
 
 
-# class CommentForm(forms.ModelForm):
-#     class Meta:
-#         model = Comment
-#         fields = ['comments']
 
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comments 
+        fields = ['body']
 
-#         for name, field in self.fields.items():
-#             field.widget.attrs.update({'class': 'form-control'})
-#         self.fields['body'].widget.attrs.update({'rows': '4'})
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+        self.fields['body'].widget.attrs.update({'rows': '4'})

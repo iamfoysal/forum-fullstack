@@ -524,6 +524,8 @@ Flexbox card styles
   font-size: 16px;
   border: none;
   outline: none;
+  -webkit-box-shadow: 0 0 15px #ff3900;
+  box-shadow: 0 0 15px #ff3900;
   background-color:  #db0d0de5;
   color: rgb(255, 255, 255);
   height: auto;
@@ -531,6 +533,7 @@ Flexbox card styles
   cursor: pointer;
   border-radius: 50%;
   width: 45px;
+  transition: .9s;
 }
 
 #myBtn:hover {

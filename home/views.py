@@ -4,7 +4,10 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
-from .form import *
+from .models import Category,BlogModel,Profile,Comments
+from .form import BlogForm, CommentForm
+from django.contrib.auth.models import User
+
 
 
 def home(request):
@@ -182,3 +185,37 @@ def verify(request, token):
         print(e)
     
     return redirect('/')
+
+# def comments(request, pk):
+#     form = CommentForm()
+#     comments = get_object_or_404(BlogModel, pk=pk)
+
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#            comment = form.save(commit=False)
+#            comment.blog = comments
+#            comment.user = request.user.profile
+#            comment.save()
+#            messages.success(request, "Comment added successfully.")
+           
+#     context = {'comments': comments,'form': form,}
+#     return render(request, 'blog/blog_detail.html', context )
+
+def comments(request, pk):
+    form = CommentForm()
+    feed = get_object_or_404(BlogModel, pk=pk)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+           comment = form.save(commit=False)
+           comment.feed = feed
+           comment.author = request.user.profile
+           comment.save()
+           messages.success(request, "Comment added successfully.")
+
+    return render(request, 'blog/blog_detail.html', {
+        'feed': feed,
+        'form': form,
+    })
