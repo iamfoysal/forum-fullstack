@@ -70,13 +70,6 @@
         <form action="" method="post">
           {% csrf_token %}
 
-  
-    <form action="" method="post">
-      
-        {% csrf_token %}
-      
-        <textarea type="text" class="input-comment" placeholder="Write a comment"></textarea>
-
           {% for field in form %}
           <div class="mb-3">
             <label for="{{ field.id }}" class="">{{ field.label_tag }}</label>
