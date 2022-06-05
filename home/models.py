@@ -1,7 +1,8 @@
-from froala_editor.fields import FroalaField
 from django.contrib.auth.models import User
 from django.db import models
-from .helpers import * 
+from froala_editor.fields import FroalaField
+
+from .helpers import *
 
 
 class Category (models.Model):
@@ -52,11 +53,17 @@ class Profile(models.Model):
 
 
 
-class Comments(models.Model):
+class BlogComment(models.Model):
     body = models.TextField()
+<<<<<<< HEAD
     feed = models.ForeignKey(BlogModel,  on_delete=models.CASCADE, null=True, blank="True")
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank="True")
     created_at = models.DateTimeField(auto_now_add=True)
+=======
+    post = models.ForeignKey(BlogModel,on_delete=models.CASCADE, null=True, blank="True")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank="True")
+    commented_at = models.DateTimeField(auto_now_add=True)
+>>>>>>> da0b392153183ccd5363843bbdaedc1301c1106b
 
     def __str__(self):
         return self.body

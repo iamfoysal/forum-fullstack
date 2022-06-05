@@ -1,0 +1,73 @@
+{% extends "blog/base.html" %}
+{% load social_share %}
+{% block title %} {{blog_obj.title}} {% endblock %}
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+<section class="container">
+  <div class="post-details">
+    <h1 class="post-details-title"> {{blog_obj.title}} </h1>
+    {% if request.user.is_authenticated %}
+    <a class="user-and-date"><i class="fa fa-pencil-square-o" aria-hidden="true"> </i> {{blog_obj.user.username}} </a>
+    {% else %}
+    {% endif %}
+    <time class="user-and-date"> <i class="fa fa-clock-o" aria-hidden="true"></i> {{blog_obj.created_at}}</time>
+    <div class="post-details-menu">
+      <a href="{% url 'home' %}" style="color: rgb(228, 94, 17);"><i class='bx bx-home'></i>Home </a>
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'add_blog' %}"> / Create Post</a>
+      {% else %}
+      {% endif %}
+    </div>
+
+    <div class="post-imgs">
+      <img class="post-dp" src="/media/{{blog_obj.image}}" alt="">
+    </div>
+    <div class="post-word post-dp">
+      <p>{{blog_obj.sub_title}}</p>
+      {{blog_obj.content|safe}}
+
+      <div class="user-profile">
+        <ul class="post-times">
+          <hr>
+          <li><a class="post-item" href="#"><i class="fa fa-comment" aria-hidden="true"></i> {{ total_comment}}</a></li>
+          <li><a class="post-item" href="#"><i class="fa fa-share" aria-hidden="true"></i> Share with:</a></li>
+        
+          <li class="post-item">{% post_to_facebook "Check it out!" object_or_url " Facebook!" %}</li>
+          <li class="post-item">{% post_to_twitter "Check it out!" object_or_url "Twitter" %}</li>
+          <li class="post-item">{% post_to_linkedin  object_or_url  "linkedin" %}</li>
+          
+        </ul>
+      </div>
+<br><br>
+
+<!-- comment sections -->
+
+      {% if comments %}
+        <h2 class="">All Comments</h2>
+
+        <ul class="space-y-4">
+          {% for comment in comments %}
+          <li class="">
+            {{ comment }} by {{ comment.author }} -
+            <small class="">{{ comment.created_at|timesince }} ago</small>
+            {% if request.user == comment.author %}
+            <div class="mt-3">
+              <a href="#" class="">Edit</a>
+              <a href="#" class="">Delete</a>
+            </div>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        <hr class="my-6" />
+
+      {% endif %}
+
+      <div class="">
+        <a href="{% url 'blog_detail' blog_obj.slug %}" class="btn btn-info">Add a commnet</a>
+      </div>
+    <hr class="hr-custom">
+</section>
+
+{% endblock %}

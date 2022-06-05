@@ -32,7 +32,7 @@
                   class="screen-reader-text">Expand child menu</span></button></a>
             <ul class="sub-menu">
               {% if request.user.is_authenticated %}
-              <li><a href="{% url 'add_blog' %}">Add</a></li>
+              <li><a href="{% url 'add_blog' %}">Post</a></li>
               <li><a href="{% url 'see_blog' %}">Profile</a></li>
               <li><a href="{% url 'logout_view' %}" class="fa fa-sign-out" aria-hidden="true">logout</a></li>
               {% else %}

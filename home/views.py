@@ -1,15 +1,15 @@
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Q
-from .models import Category,BlogModel,Profile,Comments
-from .form import BlogForm, CommentForm
-from django.contrib.auth.models import User
-
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .form import *
+from .form import BlogForm, CommentForm
+from .models import BlogComment, BlogModel, Category, Profile
+
+
 def home(request):
     # blogs= BlogModel.objects.all().order_by('-created_at')
     # blogs = BlogModel.objects.filter(category__slug=slug)
@@ -67,12 +67,40 @@ def login(request):
 
 
 def blog_detail(request, slug):
-    context = {}
-    try:
-        blog_obj = BlogModel.objects.filter(slug = slug).first()
-        context['blog_obj'] =  blog_obj
-    except Exception as e:
-        print(e)
+    blog_obj = BlogModel.objects.filter(slug = slug).first()
+    comments = blog_obj.blogcomment_set.all()
+    total_comment = comments.count()
+    form = CommentForm()
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = blog_obj
+            comment.author = request.user
+            comment.save()
+            messages.success(request,"commnet added successfully")
+
+            context = {
+                'blog_obj' : blog_obj,
+                'comments': comments,
+                'total_comment' : total_comment,
+
+            }
+
+            return render(request, 'blog/blog_detail_with_comment.html', context)
+
+    else:
+        form = CommentForm()
+
+    context = {
+        'blog_obj' : blog_obj,
+        'form' : form,
+        'comments': comments,
+        'total_comment' : total_comment,
+
+    }
+
     return render(request , 'blog/blog_detail.html' , context)
 
 
@@ -106,7 +134,7 @@ def add_blog(request):
             category_id= request.POST.get('category')
             # print("i find category ", category_id)
             user = request.user
-           
+        
             if form.is_valid():
                 content = form.cleaned_data['content']
 
@@ -177,8 +205,8 @@ def verify(request, token):
     try:
         profile_obj = Profile.objects.filter(token = token).first()
         if profile_obj:
-            profile_obj.is_verified = True
-            profile_obj.save()
+           profile_obj.is_verified=True
+           profile_obj.save()
             # messages.success(request, f"Your account successfully Verifyed!")
         return redirect('/login/')
 
@@ -187,36 +215,3 @@ def verify(request, token):
     
     return redirect('/')
 
-# def comments(request, pk):
-#     form = CommentForm()
-#     comments = get_object_or_404(BlogModel, pk=pk)
-
-#     if request.method == 'POST':
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#            comment = form.save(commit=False)
-#            comment.blog = comments
-#            comment.user = request.user.profile
-#            comment.save()
-#            messages.success(request, "Comment added successfully.")
-           
-#     context = {'comments': comments,'form': form,}
-#     return render(request, 'blog/blog_detail.html', context )
-
-def comments(request, pk):
-    form = CommentForm()
-    feed = get_object_or_404(BlogModel, pk=pk)
-
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-           comment = form.save(commit=False)
-           comment.feed = feed
-           comment.author = request.user.profile
-           comment.save()
-           messages.success(request, "Comment added successfully.")
-
-    return render(request, 'blog/blog_detail.html', {
-        'feed': feed,
-        'form': form,
-    })

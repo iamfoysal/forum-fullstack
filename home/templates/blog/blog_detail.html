@@ -2,7 +2,8 @@
 {% load social_share %}
 {% block title %} {{blog_obj.title}} {% endblock %}
 {% block content %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+  integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
 <section class="container">
   <div class="post-details">
@@ -11,7 +12,8 @@
     <a class="user-and-date"><i class="fa fa-pencil-square-o" aria-hidden="true"> </i> {{blog_obj.user.username}} </a>
     {% else %}
     {% endif %}
-    <time class="user-and-date"> <i class="fa fa-clock-o" aria-hidden="true"></i> {{blog_obj.created_at}}</time>
+    <time class="user-and-date"> <i class="fa fa-clock-o" aria-hidden="true"></i>
+      {{blog_obj.created_at |timesince}}</time>
     <div class="post-details-menu">
       <a href="{% url 'home' %}" style="color: rgb(228, 94, 17);"><i class='bx bx-home'></i>Home </a>
       {% if request.user.is_authenticated %}
@@ -26,47 +28,23 @@
     <div class="post-word post-dp">
       <p>{{blog_obj.sub_title}}</p>
       {{blog_obj.content|safe}}
-
+      <hr class="my-6" />
       <div class="user-profile">
+        <hr>
         <ul class="post-times">
-          <li><a class="post-item" href="#"><i class="fa fa-comment" aria-hidden="true"></i> 10 Comments</a></li>
-          <li><a class="post-item" href="#"><i class="fa fa-share" aria-hidden="true"></i> Share with:</a></li>
-          <li><a class="post-item" href=""><i class="fa fa-facebook"></i></a></li>
-          <li><a class="post-item" href="#"><i class="fa fa-twitter"></i></a></li>
-          <li class="post-item">{% post_to_facebook "Check it out!" object_or_url " Facebook!" %}</li>
-          <li class="post-item">{% post_to_twitter "Check it out!" object_or_url "Twitter" %}</li>
-          <li class="post-item">{% post_to_linkedin  object_or_url  "linkedin" %}</li>
-          <li><a class="post-item" href="#"><i class="fa fa-linkedin"></i></a></li>
+          <li class="post-item"><i class="fa fa-comment" aria-hidden="true"></i> {{total_comment}}
+            Comments</li>
+          <li class="post-item"> <i class="fa fa-share" aria-hidden="true"></i> Share with:</li>
+          <li class="post-item">{% post_to_facebook " {{blog_obj.title}}" object_or_url  %}</li>
+          <li class="post-item">{% post_to_twitter " {{blog_obj.title}}" object_or_url  %}</li>
+          <li class="post-item"></i>{% post_to_linkedin " {{blog_obj.title}}" object_or_url  %}</li>
+          <li class="post-item"></i>{% send_email blog_obj.title "{{blog_obj.title}}" object_or_url "Share via email" %}
+          </li>
         </ul>
       </div>
-<br><br><br><br><br><br><br>
-<p>Comment Sections</p>
-      <!-- comment sections -->
+      <br><br>
 
-      {% if feed.comment_set.all %}
-      <h2 class="">All Comments</h2>
-
-      <ul class="space-y-4">
-        {% for comment in feed.comment_set.all %}
-        <li class="">
-          {{ comment }} by {{ comment.author }} -
-          <small class="">{{ comment.created_at|timesince }} ago</small>
-          {% if request.user.profile == comment.author %}
-          <div class="mt-3">
-            <a href="#" class="">Edit</a>
-            <a href="#" class="">Delete</a>
-          </div>
-          {% endif %}
-        </li>
-        {% endfor %}
-      </ul>
-
-      <hr class="my-6" />
-      {% endif %}
-
-      <div class="">
-        <h2 class="">Add a comment</h2>
-
+<<<<<<< HEAD
         <form action="" method="post">
           {% csrf_token %}
 
@@ -74,22 +52,59 @@
           <div class="mb-3">
             <label for="{{ field.id }}" class="">{{ field.label_tag }}</label>
             {{ field }}
-          </div>
-          <div class="">{{ field.errors }}</div>
-          {% endfor %}
+=======
+      <!-- comment sections -->
 
+      {% if comments %}
+      <h5 class="">All Comments</h4>
+        <ul class="space-y-4 ml-3">
+          {% for comment in comments %}
           <div class="">
-            <button type="reset" class="inline-block ">Clear</a>
-              <button type="submit"
-                class="inline-block">Submit</button>
+            <p class="text-info inline-block "
+              style="display: inline-block; margin: 0; padding: 0; border-bottom: 1px solid rgb(0, 137, 190);">
+              {{ comment.author }} </p>
+>>>>>>> da0b392153183ccd5363843bbdaedc1301c1106b
           </div>
-        </form>
-      </div>
-    </div>
-    <hr class="hr-custom">
-  </div>
+          <li class="">
+            <p class="pb-0 mb-0" style="display: block ; ">{{ comment }}</p>
+            <small class="inline-block" style="margin-top: 0; padding-left: 15px; ">{{ comment.commented_at|timesince }}
+              ago</small>
+            {% if request.user == comment.author %}
+            <div class="mt-3">
+              <a href="#" class="">Edit</a>
+              <a href="#" class="">Delete</a>
+            </div>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        <hr class="my-6" />
 
-</section>
+        {% endif %}
+
+        <div class="">
+          {% if request.user.is_authenticated %}
+          <h5 class="">Add a comment</h5>
+          <form action="" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-3">
+              <label for="{{ field.id }}" class="">{{ field.label_tag }}</label>
+              {{ field }}
+            </div>
+            <div class="">{{ field.errors }}</div>
+            {% endfor %}
+
+            <div class="conainer">
+              <button type="reset" class="inline-block comment-button comment-button-clear">Clear</a>
+              <button type="submit" class="inline-block comment-button comment-button-submit ">Submit</button>
+            </div>
+          </form>
+          {% else %}
+          <a class="btn btn-log-in comment-button" href="{% url 'login' %}">Add a comment</a>
+          {% endif %}
+        </div>
+        <hr class="hr-custom">
 </section>
 
 {% endblock %}

@@ -1,6 +1,8 @@
 from django import forms
 from django.forms import ModelForm
-from .models import *
+
+from .models import BlogComment, BlogModel
+
 
 class BlogForm(forms.ModelForm):
     class Meta:
@@ -12,7 +14,7 @@ class BlogForm(forms.ModelForm):
 
 class CommentForm(ModelForm):
     class Meta:
-        model = Comments 
+        model = BlogComment
         fields = ['body']
 
     def __init__(self, *args, **kwargs):
@@ -20,4 +22,4 @@ class CommentForm(ModelForm):
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
-        self.fields['body'].widget.attrs.update({'rows': '4'})
+        self.fields['body'].widget.attrs.update({'rows': '3'})
