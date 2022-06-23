@@ -560,7 +560,7 @@ body{
 
 .searchTerm {
   width: 100%;
-  border: 3px solid #ece9e8;
+  border: 3px solid #fff;
   border-right: none;
   padding: 5px;
   /* height: 20px; */
@@ -597,7 +597,7 @@ body{
 /* sidebar search */
 .sidebar-searchTerm {
   width: 100%;
-  border: 3px solid #ffffff;;
+  border: 3px solid #fff;
   border-right: none;
   padding: 5px;
   /* height: 20px; */
