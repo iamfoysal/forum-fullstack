@@ -44,6 +44,15 @@
       </div>
       <br><br>
 
+<<<<<<< HEAD
+        <form action="" method="post">
+          {% csrf_token %}
+
+          {% for field in form %}
+          <div class="mb-3">
+            <label for="{{ field.id }}" class="">{{ field.label_tag }}</label>
+            {{ field }}
+=======
       <!-- comment sections -->
 
       {% if comments %}
@@ -54,6 +63,7 @@
             <p class="text-info inline-block "
               style="display: inline-block; margin: 0; padding: 0; border-bottom: 1px solid rgb(0, 137, 190);">
               {{ comment.author }} </p>
+>>>>>>> da0b392153183ccd5363843bbdaedc1301c1106b
           </div>
           <li class="">
             <p class="pb-0 mb-0" style="display: block ; ">{{ comment }}</p>
