@@ -41,20 +41,20 @@
             <a href="{% url 'blog_detail' blog.slug %}">
               <img src="/media/{{blog.image}}" alt="meow">
               <div class="card-content">
-                <h2 >{{blog.title}}</h2>
+                <h2>{{blog.title}}</h2>
                 <small class="user-and-date"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   {{blog.user.username}}</small>
                 <small class="user-and-date"><i class="fa fa-clock-o" aria-hidden="true"></i>
                   {{blog.created_at}}</small>
                 <small class="user-and-date"><i class="fa fa-clock-o" aria-hidden="true"></i>
                   {{blog.category.name}}</small>
-                 <!-- <p style="
+                <!-- <p style="
                   width: 250px;
                   white-space: nowrap;
                   overflow: hidden;
                   text-overflow: ellipsis;"
-                >{{blog.content|safe}}</p> --> 
-                <p >{{blog.sub_title}} </p>
+                >{{blog.content|safe}}</p> -->
+                <p>{{blog.sub_title}} </p>
               </div> <!-- .card-content -->
             </a>
           </article><!-- .card -->
@@ -78,7 +78,7 @@
           <ul>
             {% for category in categories %}
             <li>
-              <a class="dropdown-item" href="{% url 'category' category.slug %} " >
+              <a class="dropdown-item" href="{% url 'category' category.slug %} ">
                 {{category.name}}
               </a>
             </li>

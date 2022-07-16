@@ -48,7 +48,8 @@
           {% for comment in comments %}
           <li class="">
             {{ comment }} by {{ comment.author }} -
-            <small class="">{{ comment.created_at|timesince }} ago</small>
+            <small class="">{{ comment.commented_at|timesince }}
+              ago</small>
             {% if request.user == comment.author %}
             <div class="mt-3">
               <a href="#" class="">Edit</a>

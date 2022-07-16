@@ -191,7 +191,6 @@ def blog_update(request, slug):
             blog_obj.save()
             messages.success(request, f"Blog updated successfully!")
             return redirect('/')
-        
         context = {'blog_obj':blog_obj,'form':form, 'categories':categories }
         
     

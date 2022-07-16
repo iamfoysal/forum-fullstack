@@ -2,8 +2,6 @@
 {% load social_share %}
 {% block title %} {{blog_obj.title}} {% endblock %}
 {% block content %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-  integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
 <section class="container">
   <div class="post-details">
@@ -30,7 +28,6 @@
          {{blog_obj.content|safe}}
       <hr class="my-6" />
       <div class="user-profile">
-        <hr>
         <ul class="post-times">
           <li class="post-item"><i class="fa fa-comment" aria-hidden="true"></i> {{total_comment}}
             Comments</li>
@@ -67,7 +64,7 @@
               </li>
               {% endfor %}
             </ul>
-            <hr class="my-6" />
+            <hr class="my-6"/>
 
             {% endif %}
             <div class="">
@@ -92,7 +89,6 @@
               <a class="btn btn-log-in comment-button" href="{% url 'login' %}">Add a comment</a>
               {% endif %}
             </div>
-            <hr class="hr-custom">
         </section>
 
 {% endblock %}
