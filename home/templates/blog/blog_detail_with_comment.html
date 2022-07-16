@@ -25,18 +25,16 @@
     </div>
     <div class="post-word post-dp">
       <p>{{blog_obj.sub_title}}</p>
-      {{blog_obj.content|safe}}
+        {{blog_obj.content|safe}}
 
       <div class="user-profile">
         <ul class="post-times">
           <hr>
           <li><a class="post-item" href="#"><i class="fa fa-comment" aria-hidden="true"></i> {{ total_comment}}</a></li>
           <li><a class="post-item" href="#"><i class="fa fa-share" aria-hidden="true"></i> Share with:</a></li>
-        
           <li class="post-item">{% post_to_facebook "Check it out!" object_or_url " Facebook!" %}</li>
           <li class="post-item">{% post_to_twitter "Check it out!" object_or_url "Twitter" %}</li>
           <li class="post-item">{% post_to_linkedin  object_or_url  "linkedin" %}</li>
-          
         </ul>
       </div>
 <br><br>
